@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_db
+from app.core.config import settings
 from app.services.auto_controller import calculate_control_decision
 
 
@@ -10,8 +11,6 @@ router = APIRouter(
     prefix="/control",
     tags=["control"],
 )
-
-API_KEY = "dev-token-change-me"
 
 
 class ControlCommand(BaseModel):
@@ -55,7 +54,7 @@ def send_control_command(
     Accept a manual/AI flap-control command.
     """
 
-    if x_api_key != API_KEY:
+    if x_api_key != settings.api_token:
         raise HTTPException(
             status_code=401,
             detail="Invalid API key",
@@ -103,7 +102,7 @@ def automatic_control(
     Target angles
     """
 
-    if x_api_key != API_KEY:
+    if x_api_key != settings.api_token:
         raise HTTPException(
             status_code=401,
             detail="Invalid API key",
@@ -139,7 +138,6 @@ def automatic_control(
         "device_id": decision.device_id,
         "source": "ai",
         "control_mode": "AUTO",
-
         "current_angles": {
             "flap_1": round(
                 decision.current_angles[0],
@@ -154,7 +152,6 @@ def automatic_control(
                 1,
             ),
         },
-
         "target_angles": {
             "flap_1": round(
                 decision.target_angles[0],
@@ -169,19 +166,15 @@ def automatic_control(
                 1,
             ),
         },
-
         "reason": decision.reason,
-
         "expected_power_gain_percent": (
             decision.expected_power_gain_percent
         ),
-
         "safety_status": (
             "SAFE"
             if decision.safe
             else "UNSAFE"
         ),
-
         "message": (
             "Automatic flap recommendation calculated "
             "successfully."
