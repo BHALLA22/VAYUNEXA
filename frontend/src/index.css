@@ -35,27 +35,36 @@
 
 /* Self-contained turbine atmosphere.
    No external image URL. */
+/* Local hero image fallback — keep the real turbine asset visible. */
 .hero-image {
   background:
-    radial-gradient(circle at 53% 47%,
+    radial-gradient(
+      circle at 53% 47%,
       rgba(103,217,245,.12) 0,
       rgba(103,217,245,.045) 14%,
-      transparent 32%),
-    radial-gradient(circle at 72% 24%,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 72% 24%,
       rgba(74,154,184,.12) 0,
-      transparent 27%),
-    radial-gradient(circle at 24% 62%,
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 24% 62%,
       rgba(54,127,148,.09) 0,
-      transparent 30%),
+      transparent 30%
+    ),
     linear-gradient(
       118deg,
-      rgba(8,24,33,.98) 0%,
-      rgba(9,28,39,.94) 28%,
-      rgba(8,22,31,.88) 54%,
-      rgba(5,15,22,.98) 100%
-    );
-  opacity: 1;
-  filter: none;
+      rgba(8,24,33,.42) 0%,
+      rgba(9,28,39,.28) 28%,
+      rgba(8,22,31,.18) 54%,
+      rgba(5,15,22,.48) 100%
+    ),
+    url("/assets/vayunexa-turbine-hero.png") center 44% / cover no-repeat;
+
+  opacity: .92;
+  filter: saturate(.9) contrast(1.04);
 }
 
 /* Subtle horizon/glow behind the digital twin. */
