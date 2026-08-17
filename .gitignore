@@ -1,0 +1,43 @@
+﻿# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+*.log
+
+# ---- Environment secrets ----
+.env
+*.env.local
+
+# ---- Node / Frontend ----
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# ---- AI artifacts (large / regenerable) ----
+ai/models/*.joblib
+ai/data/raw/*.csv
+ai/data/processed/*.csv
+!ai/data/raw/.gitkeep
+!ai/data/processed/.gitkeep
+
+# ---- Database ----
+*.sqlite3
+pgdata/
+*.dump
+
+# ---- PlatformIO ----
+firmware/esp8266/.pio/
+firmware/esp8266/.vscode/
+
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Docker ----
+*.pid

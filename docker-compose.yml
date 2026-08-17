@@ -1,0 +1,21 @@
+﻿services:
+  db:
+    image: postgres:16
+    container_name: vayunexa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vayunexa
+      POSTGRES_PASSWORD: vayunexa_dev_password
+      POSTGRES_DB: vayunexa
+    ports:
+      - "5432:5432"
+    volumes:
+      - vayunexa_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vayunexa -d vayunexa"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  vayunexa_pgdata:
